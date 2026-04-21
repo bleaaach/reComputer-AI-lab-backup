@@ -1,0 +1,83 @@
+# Tools catalog — single source of truth for /tools. See README.md in this folder.
+
+series:
+  - id: rk
+    title: reComputer RK Series
+    description: "Hardware platform tools for reComputer RK series: flashing, model conversion (CV/LLM/VLM), optimization."
+    categories:
+      - id: cv
+        title: CV
+        items:
+          - id: rknn-toolkit2-convert
+            title: RKNN Toolkit2 Model Conversion Tool
+            description: Convert models to RKNN format with basic verification before deployment.
+            path: rk/cv/rknn-toolkit2-convert.md
+      - id: llm
+        title: LLM
+        items:
+          # - id: rkllm-convert-tool
+          #   title: Docker-based LLM model Convert Tool
+          #   description: Containerized conversion workflow for LLM models.
+          #   path: rk/llm/llm-convert.md
+          - id: rkllm-deploy-tool
+            title: Docker-based LLM model Deploy Tool
+            description: Use a Docker container to deploy LLM model on the device.
+            path: rk/llm/rkllm-deploy.md
+          - id: llm-speed-test
+            title: Speed Test Tool
+            description: Performance testing for LLM models.
+            path: rk/llm/llm-speed-test.md
+      - id: vlm
+        title: VLM
+        items:
+          # - id: vlm-convert-tool
+          #   title: Docker-based VLM model convert Tool
+          #   description: Containerized conversion workflow for VLM models.
+          #   path: rk/vlm/vlm-convert.md
+          - id: vlm-deploy-tool
+            title: Docker-based VLM model Deploy Tool
+            description: Use a Docker container to deploy VLM model on the device.
+            path: rk/vlm/vlm-deploy.md
+          - id: vlm-speed-test
+            title: Speed Test Tool
+            description: Performance testing for VLM models.
+            path: rk/vlm/vlm-speed-test.md
+      - id: general
+        title: General
+        items:
+          - id: opencv
+            title: OpenCV
+            description: Image processing and basic vision toolchain.
+            path: rk/general/opencv.md
+
+  - id: r
+    title: reComputer R Series
+    description: "Tools for reComputer R series. Coming soon."
+    categories:
+      - id: pending
+        title: Coming soon
+        items:
+
+    #   - id: llm
+    #     title: LLM
+    #     items:
+
+    #   - id: vlm
+    #     title: VLM
+    #     items:
+
+    #   - id: general
+    #     title: General
+    #     items:
+
+  - id: j
+    title: reComputer J Series
+    description: "Tools for reComputer J series. Coming soon."
+    categories:
+      - id: pending
+        title: Coming soon
+        # items:
+        #   - id: pending
+        #     title: TBD
+        #     description: Tools for this series are planned.
+        #     path: j/pending/pending.md

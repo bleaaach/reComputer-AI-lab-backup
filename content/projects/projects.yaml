@@ -1,0 +1,42 @@
+# Community projects — single source of truth for /projects and homepage featured block.
+# See README.md in this folder for how to add, remove, or edit entries.
+
+projects:
+  - id: "1"
+    title: "Object Detection with YOLO11 on reComputer-RK"
+    summary: "Industrial CV solution for RK3588/RK3576: NPU-accelerated YOLO11 & MJPEG streaming."
+    author: "Seeed Studio"
+    publishedAt: "2026-03-09"
+    tags: ["YOLO11", "Rockchip", "reComputer-RK"]
+    featured: true
+    sourceUrl: "https://wiki.seeedstudio.com/object_detection_with_yolov11_on_recomputer_rk/"
+    sourceLabel: "Wiki"
+    cover:
+      type: gif
+      url: "https://files.seeedstudio.com/wiki/reComputer_RK/wiki_image/rk_yolo11.gif"
+
+  - id: "2"
+    title: "Gun detection with Frigate NVR on R2000"
+    summary: "Real-time AI firearm detection on reComputer R using YOLO11 and Hailo."
+    author: "seeed studio"
+    publishedAt: "2025-12-16"
+    tags: ["Raspberry-Pi", "Frigate-NVR", "reComputer-R"]
+    featured: true
+    sourceUrl: "https://wiki.seeedstudio.com/gun_detection_with_frigate_nvr_on_r2000/"
+    sourceLabel: "Wiki"
+    cover:
+      type: gif
+      url: "https://files.seeedstudio.com/wiki/reComputer/Application/Firearm_Detection_With_Frigate_NVR_on_R2130/gun_detection_gif.gif"
+
+  - id: "3"
+    title: "Deploy NVBlox with Orbbec Camera on Jetson AGX Orin"
+    summary: "Isaac ROS NVBlox: GPU-powered real-time 3D mapping for robots."
+    author: "Seeed Studio"
+    publishedAt: "2024-08-15"
+    tags: ["isaac-ros", "nvblox", "rgb-d"]
+    featured: true
+    sourceUrl: "https://wiki.seeedstudio.com/deploy_nvblox_jetson_agx_orin/"
+    sourceLabel: "Wiki"
+    cover:
+      type: gif
+      url: "https://media.githubusercontent.com/media/NVIDIA-ISAAC-ROS/.github/release-4.0/resources/isaac_ros_docs/repositories_and_packages/isaac_ros_nvblox/isaac_sim_nvblox_humans.gif"

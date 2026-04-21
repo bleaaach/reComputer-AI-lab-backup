@@ -1,0 +1,309 @@
+# Model catalog: single source of truth for reComputer AI Lab
+# Type/secondary category drive Tab and Family grouping; edit this file to add/remove models.
+
+defaults:
+  devices:
+    - id: jetson-orin
+      label: Jetson Orin
+    - id: jetson-nano
+      label: Jetson Orin Nano
+    - id: rk3588
+      label: RK3588
+    - id: recomputer-j401
+      label: reComputer J401
+    - id: recomputer-r01
+      label: reComputer R01
+  engines:
+    - id: vllm
+      label: VLLM
+    - id: ollama
+      label: Ollama
+    - id: tensorrt
+      label: TensorRT-LLM
+
+models:
+  # --- CV: YOLO ---
+  - id: yolo11n
+    name: YOLO 11n
+    slug: yolo11n
+    overview: YOLO11 目标检测系列 nano 版本，轻量高效，适合边缘部署。测试用模型。
+    type: cv
+    secondaryCategoryId: yolo
+    secondaryCategoryName: YOLO
+    featured: true
+    isNew: true
+    updatedAt: "2025-01-15"
+    downloads: 1200
+    favorites: 320
+    size: "~6MB"
+    ram: "1GB+"
+    precision: FP16
+    restApiEndpoint: "POST http://localhost:8080/v1/detection"
+    restApiExample: 'curl -X POST "http://localhost:8080/v1/detection" -H "Content-Type: application/json" -d ''{"image_url": "https://example.com/image.jpg", "conf": 0.25}'''
+    restApiResponseExample: '{"success": true, "predictions": [{"class": "person", "confidence": 0.92}]}'
+    curlExample: |
+      curl -X POST "http://localhost:8080/v1/detection" \
+        -H "Content-Type: application/json" \
+        -d '{"image_url": "https://example.com/image.jpg", "conf": 0.25}'
+    pythonExample: |
+      import requests
+      resp = requests.post(
+          "http://localhost:8080/v1/detection",
+          json={"image_url": "https://example.com/image.jpg", "conf": 0.25},
+      )
+      print(resp.json())
+    devices:
+      - id: recomputer-j401
+        label: reComputer J401
+      - id: rk3588
+        label: reComputer RK3588
+      - id: recomputer-r01
+        label: reComputer R01
+    engines:
+      - id: vllm
+        label: VLLM
+      - id: tensorrt
+        label: TensorRT-LLM
+    docker:
+      - deviceId: recomputer-j401
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-jetson-orin \
+            vllm serve yolo11n
+      - deviceId: rk3588
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-rk3588 \
+            vllm serve yolo11n
+      - deviceId: recomputer-r01
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-rk3588 \
+            vllm serve yolo11n
+    benchmarks:
+      - device: reComputer J401
+        value: 55
+        unit: FPS
+      - device: reComputer RK3588
+        value: 42
+        unit: FPS
+      - device: reComputer R01
+        value: 35
+        unit: FPS
+    wiki: |
+      ## 概述
+      YOLO 11n 是 YOLO11 目标检测系列的 nano 版本，参数量最小，适合在 reComputer 等边缘设备上实时运行。
+      支持常见 COCO 类别检测，可通过 REST API 或 Python SDK 调用。
+      部署后可通过 HTTP 上传图片或 URL 获取检测结果（边界框与置信度）。
+
+  - id: yolo11s
+    name: yolo11s
+    slug: yolo11s
+    overview: YOLO11 small，精度与速度平衡。
+    type: cv
+    secondaryCategoryId: yolo
+    secondaryCategoryName: YOLO
+    updatedAt: "2025-01-10"
+    downloads: 800
+    favorites: 180
+    size: "~22MB"
+    ram: "2GB+"
+    benchmarks:
+      - device: reComputer J401
+        value: 48
+        unit: FPS
+      - device: reComputer RK3588
+        value: 35
+        unit: FPS
+      - device: reComputer R01
+        value: 28
+        unit: FPS
+    wiki: |
+      YOLO11 small 版本，在精度与速度之间取得平衡，适合多数边缘场景。
+
+  - id: yolo11m
+    name: yolo11m
+    slug: yolo11m
+    overview: YOLO11 medium，更高精度。
+    type: cv
+    secondaryCategoryId: yolo
+    secondaryCategoryName: YOLO
+    updatedAt: "2025-01-08"
+    downloads: 500
+    favorites: 95
+    size: "~52MB"
+    ram: "2GB+"
+    benchmarks:
+      - device: reComputer J401
+        value: 38
+        unit: FPS
+      - device: reComputer RK3588
+        value: 28
+        unit: FPS
+      - device: reComputer R01
+        value: 22
+        unit: FPS
+    wiki: |
+      YOLO11 medium 版本，更高精度，适合对检测质量要求较高的场景。
+
+  # --- LLM: deepseek-r1-distill-qwen ---
+  - id: ds-r1-qwen-7b-w4a16-g128
+    name: "7b-w4a16-g128"
+    slug: "7b-w4a16-g128"
+    overview: 7B 量化 w4a16，group size 128。
+    type: llm
+    secondaryCategoryId: deepseek-r1-distill-qwen
+    secondaryCategoryName: deepseek-r1-distill-qwen
+    updatedAt: "2025-01-12"
+    downloads: 650
+    favorites: 210
+    size: "~4GB"
+    ram: "8GB+"
+    inputsOutputs: "Input: Text, 32K context. Output: Text, 8192 tokens."
+    docker:
+      - deviceId: recomputer-j401
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-jetson-orin \
+            vllm serve deepseek-r1-distill-qwen/7b-w4a16-g128
+      - deviceId: rk3588
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-rk3588 \
+            vllm serve deepseek-r1-distill-qwen/7b-w4a16-g128
+    benchmarks:
+      - device: reComputer J401
+        value: 40
+        unit: tok/s
+      - device: reComputer RK3588
+        value: 28
+        unit: tok/s
+      - device: reComputer R01
+        value: 22
+        unit: tok/s
+    wiki: |
+      Deepseek R1 Distill Qwen 7B 量化模型，w4a16，group size 128。
+
+  - id: ds-r1-qwen-1.5b-w4a16
+    name: "1.5b-w4a16"
+    slug: "1.5b-w4a16"
+    overview: 1.5B w4a16 量化。
+    type: llm
+    secondaryCategoryId: deepseek-r1-distill-qwen
+    secondaryCategoryName: deepseek-r1-distill-qwen
+    featured: true
+    updatedAt: "2025-01-14"
+    downloads: 980
+    favorites: 280
+    size: "~1GB"
+    ram: "2GB+"
+    inputsOutputs: "Input: Text, 32K context. Output: Text, 8192 tokens."
+    docker:
+      - deviceId: recomputer-j401
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-jetson-orin \
+            vllm serve deepseek-r1-distill-qwen/1.5b-w4a16
+      - deviceId: recomputer-r01
+        engineId: vllm
+        command: |
+          sudo docker run -it --rm --pull always --runtime=nvidia \
+            --network host ghcr.io/seeed-studio/vllm:latest-rk3588 \
+            vllm serve deepseek-r1-distill-qwen/1.5b-w4a16
+    benchmarks:
+      - device: reComputer J401
+        value: 85
+        unit: tok/s
+      - device: reComputer RK3588
+        value: 60
+        unit: tok/s
+      - device: reComputer R01
+        value: 50
+        unit: tok/s
+    wiki: |
+      1.5B 参数，w4a16 量化，适合内存受限的边缘设备。
+
+  - id: ds-r1-qwen-1.5b-fp16
+    name: "1.5b-fp16"
+    slug: "1.5b-fp16"
+    overview: 1.5B FP16 全精度。
+    type: llm
+    secondaryCategoryId: deepseek-r1-distill-qwen
+    secondaryCategoryName: deepseek-r1-distill-qwen
+    updatedAt: "2025-01-11"
+    downloads: 720
+    favorites: 150
+    size: "~3GB"
+    ram: "4GB+"
+    inputsOutputs: "Input: Text, 32K context. Output: Text, 8192 tokens."
+    benchmarks:
+      - device: reComputer J401
+        value: 45
+        unit: tok/s
+      - device: reComputer RK3588
+        value: 32
+        unit: tok/s
+      - device: reComputer R01
+        value: 28
+        unit: tok/s
+    wiki: |
+      1.5B FP16 全精度版本，推理质量更高。
+
+  - id: ds-r1-qwen-1.5b-w4a16-g128
+    name: "1.5b-w4a16-g128"
+    slug: "1.5b-w4a16-g128"
+    overview: 1.5B w4a16，group size 128。
+    type: llm
+    secondaryCategoryId: deepseek-r1-distill-qwen
+    secondaryCategoryName: deepseek-r1-distill-qwen
+    updatedAt: "2025-01-16"
+    downloads: 1100
+    favorites: 260
+    size: "~1GB"
+    ram: "2GB+"
+    inputsOutputs: "Input: Text, 32K context. Output: Text, 8192 tokens."
+    benchmarks:
+      - device: reComputer J401
+        value: 82
+        unit: tok/s
+      - device: reComputer RK3588
+        value: 58
+        unit: tok/s
+      - device: reComputer R01
+        value: 48
+        unit: tok/s
+    wiki: |
+      1.5B w4a16 量化，group size 128。
+
+  # --- VLM: qwen2.5-vl ---
+  - id: qwen2.5-vl-3b-w4a16
+    name: "3b-w4a16"
+    slug: "3b-w4a16"
+    overview: Qwen2.5-VL 3B w4a16 量化，视觉语言模型。
+    type: vlm
+    secondaryCategoryId: qwen2.5-vl
+    secondaryCategoryName: qwen2.5-vl
+    updatedAt: "2025-01-09"
+    downloads: 420
+    favorites: 88
+    size: "~2GB"
+    ram: "4GB+"
+    inputsOutputs: "Input: Text + images. Output: Text."
+    benchmarks:
+      - device: reComputer J401
+        value: 35
+        unit: tok/s
+      - device: reComputer RK3588
+        value: 24
+        unit: tok/s
+      - device: reComputer R01
+        value: 20
+        unit: tok/s
+    wiki: |
+      Qwen2.5-VL 3B 视觉语言模型，w4a16 量化，支持图像+文本输入。

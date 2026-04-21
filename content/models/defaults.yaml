@@ -1,0 +1,22 @@
+devices:
+  - id: jetson-orin
+    label: Jetson Orin
+  - id: jetson-nano
+    label: Jetson Orin Nano
+  - id: rk3588
+    label: RK3588
+  - id: rk3576
+    label: RK3576
+  - id: recomputer-j401
+    label: reComputer J401
+  - id: recomputer-r01
+    label: reComputer R01
+engines:
+  - id: vllm
+    label: VLLM
+  - id: rknn
+    label: RKNN
+  - id: ollama
+    label: Ollama
+  - id: tensorrt
+    label: TensorRT-LLM

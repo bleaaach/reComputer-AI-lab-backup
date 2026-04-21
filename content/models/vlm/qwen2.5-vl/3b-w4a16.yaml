@@ -1,0 +1,76 @@
+id: QwenVL-3b-w4a16
+name: 3b-w4a16
+slug: 3b-w4a16
+description: A lightweight yet powerful vision language model optimized for efficient reasoning and deployment.
+overview:   QwenVL-3B-w4a16 is a quantized vision-language model with 4-bit weights and 16-bit activations. It enables efficient multimodal tasks like image captioning and VQA on resource-limited devices.
+type: vlm
+secondaryCategoryId: qwen2.5-vl
+secondaryCategoryName: qwen2.5-vl
+featured: true
+isNew: false
+updatedAt: '2026-01-08'
+downloads: 500
+favorites: 95
+size: 3.2GB
+precision: w4a16
+ram: 8GB+
+devices:
+  # - { id: reComputer-j401, label: reComputer J401 }
+  # # - { id: reComputer-rk3588, label: reComputer RK3588 }[保留]
+  - { id: reComputer-rk3576, label: reComputer RK3576 }
+# 每个 device 可选的 inference engine（J401 有 VLLM+TensorRT，其余仅 RKLLM）
+deviceEngines:
+  # recomputer-j401:
+  #   - { id: vllm, label: VLLM }
+  #   - { id: tensorrt, label: TensorRT-LLM }
+  #   - { id: ollama, label: Ollama }
+  # reComputer-rk3588:
+  #   - { id: rkllm, label: rkllm }[保留]
+  reComputer-rk3576:
+    - { id: rkllm, label: rkllm }
+docker:
+  # - deviceId: recomputer-j401
+  #   engineId: vllm
+  #   command: |
+  #     sudo docker run -it --rm --pull always --runtime=nvidia \
+  #       --network host ghcr.io/seeed-studio/vllm:latest-jetson-orin \
+  #       vllm serve yolo11n
+  # - deviceId: recomputer-j401
+  #   engineId: tensorrt
+  #   command: |
+  #     # TODO: 需要修改为 TensorRT-LLM
+  #     sudo docker run -it --rm --pull always --runtime=nvidia \
+  #       --network host ghcr.io/seeed-studio/vllm:latest-jetson-orin \
+  #       vllm serve yolo11n        
+  # - deviceId: reComputer rk3588
+  #   engineId: rkllm
+  #   command: &vllm_rk |
+  #     sudo docker run -it --rm --pull always --runtime=nvidia \
+  #       --network host ghcr.io/seeed-studio/vllm:latest-rk3588 \
+  #       vllm serve yolo11n[保留]
+  - deviceId: reComputer-rk3576
+    engineId: rkllm
+    command: |
+      sudo docker run -it --name --privileged \
+        --net=host \
+        --device /dev/dri \
+        --device /dev/dma_heap \
+        --device /dev/rknpu \
+        --device /dev/mali0 \
+        -v /dev:/dev \
+        ghcr.io/seeed-projects/rk3576-qwen2.5-vl:3b-w4a16-latest
+# benchmarks:
+  # rkllm:
+  #   - { device: reComputer J401, value: 7, unit: TTFT (ms) }
+  #   - { device: reComputer J401, value: 70, unit: Tokens/s }
+  #   - { device: reComputer rk3576, value: 7, unit: TTFT (ms) }
+  #   - { device: reComputer rk3576, value: 70, unit: Tokens/s }
+  #   - { device: reComputer rk3588, value: 7, unit: TTFT (ms) }
+  #   - { device: reComputer rk3588, value: 70, unit: Tokens/s }
+# 平台选项：Model Details 下拉切换不同平台文档（doc: 引用 MD 文件，label: 下拉显示名）
+
+wikiPlatforms:
+  - { doc: wikis/rk3576-qwenvl-3b-w4a16.md, label: reComputer RK }
+  # - { doc: wikis/deepseek-7b-jetson.md, label: reComputer Jetson }
+  
+# 无 wikiPlatforms 时使用下方 wiki

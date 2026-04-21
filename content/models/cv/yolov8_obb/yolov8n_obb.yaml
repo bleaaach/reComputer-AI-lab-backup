@@ -1,0 +1,102 @@
+id: yolov8n_obb
+name: YOLOv8n_obb
+slug: yolov8n_obb
+description: Lightweight YOLOv8 nano OBB model for fast edge deployment of oriented object detection.
+overview: YOLOv8n_obb Oriented Object Detection Series Medium Version, lightweight and efficient, designed for rotating/rotated object detection with oriented bounding boxes, ideal for edge deployment.
+type: cv
+secondaryCategoryId: yolov8_obb
+secondaryCategoryName: YOLOv8n_obb
+featured: false
+isNew: false
+updatedAt: '2026-04-03'
+downloads: 1200
+favorites: 320
+size: ~5MB
+ram: 1GB+
+precision: INT8
+restApiEndpoint: POST http://127.0.0.1:8000/api/models/yolov8n_obb/predict
+restApiExample: 'curl -X POST "curl -X POST "http://127.0.0.1:8000/api/models/yolov8n_obb/predict" -F "video=@/home/cat/test.mp4" -F "timestamp=5.5""'
+restApiResponseExample: |
+  {
+    "success": true,
+    "source": "video frame at 5.5s",
+    "predictions": [
+      {
+        "class": "ship",
+        "confidence": 0.94,
+        "obb": {
+          "x_center": 450,
+          "y_center": 320,
+          "width": 180,
+          "height": 420,
+          "angle": 35.2
+        }
+      }
+    ],
+    "image": { "width": 1280, "height": 720 }
+  }
+curlExample: |
+  curl -X POST "http://127.0.0.1:8000/api/models/yolov8n_obb/predict" -F "realtime=true"
+  # Or without file parameters
+  curl -X POST "http://127.0.0.1:8000/api/models/yolov8n_obb/predict"
+pythonExample: |
+  import requests
+  import json
+  resp = requests.post(
+      "http://127.0.0.1:8000/api/models/yolov8n_obb/predict",
+      json={},
+      timeout=30
+  )
+  result = resp.json()
+  print(json.dumps(result, indent=2, ensure_ascii=False))
+devices:
+  - id: rk3588
+    label: reComputer RK3588
+  - id: rk3576
+    label: reComputer RK3576
+engines:
+  - id: rknn
+    label: RKNN
+deviceEngines:
+  rk3588:
+    - id: rknn
+      label: RKNN
+  rk3576:
+    - id: rknn
+      label: RKNN
+docker:
+  - deviceId: rk3588
+    engineId: rknn
+    command: |
+      sudo docker run --rm --privileged --net=host \
+        -e PYTHONUNBUFFERED=1 \
+        -e RKNN_LOG_LEVEL=0 \
+        --device /dev/video1:/dev/video1 \
+        --device /dev/dri/renderD129:/dev/dri/renderD129 \
+        -v /proc/device-tree/compatible:/proc/device-tree/compatible \
+        ghcr.io/seeed-projects/recomputer-rk-cv/rk3588-yolov8-obb:latest \
+        python web_detection.py --model_path model/yolov8n_obb.rknn --camera_id 1
+  - deviceId: rk3576
+    engineId: rknn
+    command: |
+      sudo docker run --rm --privileged --net=host \
+          -e PYTHONUNBUFFERED=1 \
+          -e RKNN_LOG_LEVEL=0 \
+          --device /dev/video1:/dev/video1 \
+          --device /dev/dri/renderD128:/dev/dri/renderD128 \
+          -v /proc/device-tree/compatible:/proc/device-tree/compatible \
+          ghcr.io/seeed-projects/recomputer-rk-cv/rk3576-yolov8-obb:latest \
+          python web_detection.py --model_path model/yolov8n_obb.rknn --camera_id 1
+# benchmarks:
+#   - device: reComputer J401
+#     value: 55
+#     unit: FPS
+#   - device: reComputer RK3588
+#     value: 42
+#     unit: FPS
+#   - device: reComputer R01
+#     value: 35
+#     unit: FPS
+wikiPlatforms:
+  - { doc: wikis/YOLOv8n_obb.md, label: reComputer RK }
+

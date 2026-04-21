@@ -1,0 +1,32 @@
+# 首页轮播 Banner — 单一数据源，由 Git 维护。见同目录 README.md。
+
+banners:
+
+  - id: "banner-1"
+    imageUrl: "https://files.seeedstudio.com/Edge_box/reComputer_Lab.webp"
+    link: "/tutorials"
+    alt: "R"
+    sortOrder: 1
+  - id: "banner-2"
+    imageUrl: "https://files.seeedstudio.com/Edge_box/recomputer_rk.webp"
+    link: "/tutorials"
+    alt: "R"
+    sortOrder: 1
+
+  # - id: "2"
+  #   imageUrl: "/banners/G.jpg"
+  #   link: "/tutorials"
+  #   alt: "G"
+  #   sortOrder: 2
+
+  # - id: "3"
+  #   imageUrl: "/banners/B.jpg"
+  #   link: "/tutorials"
+  #   alt: "B"
+  #   sortOrder: 3
+
+  # - id: "1"
+  #   imageUrl: "https://signwayonline.net/wp-content/uploads/2018/02/spacesuit-banner-1200x400.jpg"
+  #   link: "/models"
+  #   alt: "Explore AI Models"
+  #   sortOrder: 4

@@ -1,0 +1,95 @@
+id: yolo11s
+name: YOLO 11s
+slug: yolo11s
+description: Compact YOLO11 small model for high-speed deployment with improved accuracy over nano.
+overview: YOLO11 Object Detection Series Small Version, lightweight yet with enhanced detection accuracy compared to nano, ideal for high-speed edge and lightweight deployment.
+type: cv
+secondaryCategoryId: yolo11
+secondaryCategoryName: YOLO11
+featured: false
+isNew: false
+updatedAt: '2026-03-04'
+downloads: 1200
+favorites: 320
+size: ~10MB
+ram: 1GB+
+precision: FP16
+restApiEndpoint: POST http://127.0.0.1:8000/api/models/yolo11/predict
+restApiExample: 'curl -X POST "curl -X POST "http://127.0.0.1:8000/api/models/yolo11/predict" -F "video=@/home/cat/test.mp4" -F "timestamp=5.5""'
+restApiResponseExample: |
+  {
+    "success": true,
+    "source": "video frame at 5.5s",
+    "predictions": [
+      {
+        "class": "person",
+        "confidence": 0.92,
+        "box": { "x1": 100, "y1": 200, "x2": 300, "y2": 500 }
+      }
+    ],
+    "image": { "width": 1280, "height": 720 }
+  }
+curlExample: |
+  curl -X POST "http://127.0.0.1:8000/api/models/yolo11/predict" -F "realtime=true"
+  # Or without file parameters
+  curl -X POST "http://127.0.0.1:8000/api/models/yolo11/predict"
+pythonExample: |
+  import requests
+  import json
+  resp = requests.post(
+      "http://127.0.0.1:8000/api/models/yolo11/predict",
+      json={},
+      timeout=30
+  )
+  result = response.json()
+  print(json.dumps(result, indent=2, ensure_ascii=False))
+devices:
+  - id: rk3588
+    label: reComputer RK3588
+  - id: rk3576
+    label: reComputer RK3576
+engines:
+  - id: rknn
+    label: RKNN
+deviceEngines:
+  rk3588:
+    - id: rknn
+      label: RKNN
+  rk3576:
+    - id: rknn
+      label: RKNN
+docker:
+  - deviceId: rk3588
+    engineId: rknn
+    command: |
+      sudo docker run --rm --privileged --net=host \
+        -e PYTHONUNBUFFERED=1 \
+        -e RKNN_LOG_LEVEL=0 \
+        --device /dev/video1:/dev/video1 \
+        --device /dev/dri/renderD129:/dev/dri/renderD129 \
+        -v /proc/device-tree/compatible:/proc/device-tree/compatible \
+        ghcr.io/seeed-projects/recomputer-rk-cv/rk3588-yolo11:latest \
+        python web_detection.py --model_path model/yolo11s.rknn --camera_id 1
+  - deviceId: rk3576
+    engineId: rknn
+    command: |
+      sudo docker run --rm --privileged --net=host \
+        -e PYTHONUNBUFFERED=1 \
+        -e RKNN_LOG_LEVEL=0 \
+        --device /dev/video1:/dev/video1 \
+        --device /dev/dri/renderD128:/dev/dri/renderD128 \
+        -v /proc/device-tree/compatible:/proc/device-tree/compatible \
+        ghcr.io/seeed-projects/recomputer-rk-cv/rk3576-yolo11:latest \
+        python web_detection.py --model_path model/yolo11s.rknn --camera_id 1
+# benchmarks:
+#   - device: reComputer J401
+#     value: 55
+#     unit: FPS
+#   - device: reComputer RK3588
+#     value: 42
+#     unit: FPS
+#   - device: reComputer R01
+#     value: 35
+#     unit: FPS
+wikiPlatforms:
+  - { doc: wikis/YOLO11.md, label: reComputer RK }

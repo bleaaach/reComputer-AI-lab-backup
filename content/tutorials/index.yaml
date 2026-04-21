@@ -1,0 +1,78 @@
+series:
+  - id: rk
+    title: reComputer RK Series
+    items:
+      - type: group
+        id: getting-start
+        title: Getting start
+        items:
+          - type: page
+            id: hardware-connection
+            title: Hardware Connection
+            path: rk/getting-start/hardware-connection.md
+          - type: page
+            id: configuration-on-first-boot
+            title: Configuration on first boot
+            path: rk/getting-start/configuration-on-first-boot.md
+          - type: page
+            id: resource-download-summary
+            title: Resource Download Summary
+            path: rk/getting-start/resource-download-summary.md
+          - type: group
+            id: flash-os
+            title: Flash OS
+            items:
+              - type: page
+                id: install-system-microsd
+                title: Install the system on the MicroSD card
+                path: rk/getting-start/flash-os/install-system-microsd.md
+      - type: page
+        id: configure
+        title: Configure
+        path: rk/configure.md
+      - type: group
+        id: application
+        title: Application
+        items:
+          - type: page
+            id: cv
+            title: CV
+            path: rk/application/cv.md
+          - type: page
+            id: llm
+            title: LLM
+            path: rk/application/llm.md
+          - type: page
+            id: nanobot
+            title: Nanobot
+            path: rk/application/nanobot.md
+          - type: page
+            id: vlm
+            title: VLM
+            path: rk/application/vlm.md
+      - type: group
+        id: benchmark
+        title: Benchmark
+        items:
+          - type: page
+            id: cv
+            title: CV
+            path: rk/benchmark/cv.md
+          - type: page
+            id: llm
+            title: LLM & VLM
+            path: rk/benchmark/llm-vlm.md
+  - id: r
+    title: reComputer R Series
+    items:
+      - type: page
+        id: overview
+        title: Overview
+        path: r/overview.md
+  - id: j
+    title: reComputer J Series
+    items:
+      - type: page
+        id: overview
+        title: Overview
+        path: j/overview.md
