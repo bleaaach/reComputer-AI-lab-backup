@@ -72,12 +72,12 @@ series:
 
   - id: j
     title: reComputer J Series
-    description: "Tools for reComputer J series. Coming soon."
+    description: "Tools for reComputer J series (NVIDIA Jetson): flashing, device management, app deployment, and more."
     categories:
-      - id: pending
-        title: Coming soon
-        # items:
-        #   - id: pending
-        #     title: TBD
-        #     description: Tools for this series are planned.
-        #     path: j/pending/pending.md
+      - id: general
+        title: General
+        items:
+          - id: seeed-jetson-developtool
+            title: Seeed Jetson Develop Tool
+            description: All-in-one AI development workbench — flash firmware, manage devices, install AI apps, and develop remotely on Jetson.
+            path: j/general/seeed-jetson-developtool.md
