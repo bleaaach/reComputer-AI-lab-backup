@@ -7,7 +7,7 @@
     "prebuild": "npm run build:models",
     "dev": "WATCHPACK_POLLING=true chokidar 'content/**/*.{yaml,yml,md}' -c 'npm run build:models' & next dev -p 3004",
     "build": "next build",
-    "postbuild": "mkdir -p .next/standalone/.next && rm -rf .next/standalone/.next/static .next/standalone/public && cp -R .next/static .next/standalone/.next/static && cp -R public .next/standalone/public",
+    "postbuild": "node scripts/copy-standalone-assets.js",
     "start": "cross-env PORT=3004 node .next/standalone/server.js",
     "lint": "next lint"
   },
